@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+}
+
+/* по центру выделенной области (область примерно по центру страницы) */
+.main {
+  margin: 0;
+  height: 70vh;
+  width: 50vw;
+
+  display: grid;
+  place-content: center;
+
+  position: absolute;
+  top: 15vh;
+  left: 25vw;
+
+  background-color: #6a30d8;
+}
+
+/* параметры: размер, цвет, расстояние  */
+:root {
+  --size: 20px;
+  --color: #d8bfd8;
+  --k: 1.5;
+}
+.circles,
+.circles::before,
+.circles::after {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  color: var(--color);
+}
+.circles {
+  position: relative;
+  left: -9999px;
+  box-shadow: 9999px 0 0 calc(-0.5 * var(--size));
+  animation: circles 1.5s infinite linear;
+  animation-delay: 0.25s;
+}
+.circles::before,
+.circles::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.circles::before {
+  box-shadow: calc(9999px - var(--size) * var(--k)) 0 0 calc(-0.5 * var(--size));
+  animation: circles-before 1.5s infinite linear;
+  animation-delay: 0s;
+}
+.circles::after {
+  box-shadow: calc(9999px + var(--size) * var(--k)) 0 0 calc(-0.5 * var(--size));
+  animation: circles-after 1.5s infinite linear;
+  animation-delay: 0.5s;
+}
+
+@keyframes circles-before {
+  0% {
+    box-shadow: calc(9999px - var(--size) * var(--k)) 0 0
+      calc(-0.5 * var(--size));
+  }
+  30% {
+    box-shadow: calc(9999px - var(--size) * var(--k)) 0 0 2px;
+  }
+  60%,
+  100% {
+    box-shadow: calc(9999px - var(--size) * var(--k)) 0 0
+      calc(-0.5 * var(--size));
+  }
+}
+@keyframes circles {
+  0% {
+    box-shadow: 9999px 0 0 calc(-0.5 * var(--size));
+  }
+  30% {
+    box-shadow: 9999px 0 0 2px;
+  }
+  60%,
+  100% {
+    box-shadow: 9999px 0 0 calc(-0.5 * var(--size));
+  }
+}
+@keyframes circles-after {
+  0% {
+    box-shadow: calc(9999px + var(--size) * var(--k)) 0 0
+      calc(-0.5 * var(--size));
+  }
+  30% {
+    box-shadow: calc(9999px + var(--size) * var(--k)) 0 0 2px;
+  }
+  60%,
+  100% {
+    box-shadow: calc(9999px + var(--size) * var(--k)) 0 0
+      calc(-0.5 * var(--size));
+  }
+}
